@@ -4,6 +4,8 @@
  */
 package Module8Lab2;
 
+import java.io.BufferedWriter;
+
 // class Tower - is a stack of integers representing a tower
 
 // TODOs:
@@ -61,15 +63,41 @@ public class Tower {
         }
     }
     
-    public void print() {
+    public void print(BufferedWriter output) {
         if (top == -1) {
-            System.out.println("Tower " + name + ": [ EMPTY ]");
+            System.out.println("\nTower " + name + ": [ EMPTY ]");
+            try {
+            	output.write("\nTower " + name + ": [ EMPTY ]");
+            } catch(Exception ioe) {
+                System.err.println(ioe.toString());
+                return;
+            }
         } else {
             System.out.print("Tower " + name + ": [ ");
+            try {
+            	output.write("\nTower " + name + ": [ ");
+            } catch(Exception ioe) {
+                System.err.println(ioe.toString());
+                return;
+            }
+            
             for (int i = 0; i <= top; i++) {
                 System.out.print(tower[i] + " ");
+                try {
+                	output.write(tower[i] + " ");
+                } catch(Exception ioe) {
+                    System.err.println(ioe.toString());
+                    return;
+                }
             }
             System.out.println("]");
+            try {
+            	output.write("]");
+            } catch(Exception ioe) {
+                System.err.println(ioe.toString());
+                return;
+            }
+            
         }
     }
 }

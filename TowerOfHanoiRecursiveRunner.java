@@ -5,6 +5,10 @@
 package Module8Lab2;
 //import FileStreamOutput...
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 //TODO:
 //no output to screen
 //add error handling
@@ -28,21 +32,43 @@ public class TowerOfHanoiRecursiveRunner {
     
     public static void main(String[] args) {
 
-        TowerOfHanoiRecursiveRunner recRunner = new TowerOfHanoiRecursiveRunner();
-        RecursiveTowerOfHanoi recToH;
+        BufferedWriter output;
         
         int numDisks = Integer.valueOf(args[0]);
         int diskCount;
+        
+        TowerOfHanoiRecursiveRunner recRunner = new TowerOfHanoiRecursiveRunner();
+        RecursiveTowerOfHanoi recToH;
+
       
         // metrics
         long startTime;
         long endTime;
         long runTime;
 
+        // Check for 2 command line arguments
+        // Ref: Project0.java
+        if (args.length != 2) {
+            System.out.println("Usage:  java TowerOfHanoiRecursiveRunner " + 
+            				   "[number of disks]" + " [output filespec]");
+            System.exit(1);
+        }
+        
+        // open the output file handler
+        // Ref: Project0.java
+        try {
+            output = new BufferedWriter(new FileWriter(args[1]));
+        } catch (Exception ioe) {
+            System.err.println(ioe.toString());
+            return;
+        }
+        
       // recursive run
       for(diskCount = 0; diskCount <= numDisks; diskCount++) {
           System.out.println("\n*|*|*|* Entering The Tower of Hanoi with " + 
                   diskCount + " Disk(s) *|*|*|*");
+          recRunner.writeResult("\n*|*|*|* Entering The Tower of Hanoi with " + 
+                  diskCount + " Disk(s) *|*|*|*", output);
           
           // if mode = (r)ecursive 
           recToH = new RecursiveTowerOfHanoi(diskCount);
@@ -50,13 +76,15 @@ public class TowerOfHanoiRecursiveRunner {
           // metrics
           startTime = System.nanoTime();
               
-          recToH.printTowers();
+          recToH.printTowers(output);
           System.out.println("Begin...");
+          recRunner.writeResult("\nBegin...", output);
           
           recToH.move(diskCount, recToH.source, recToH.auxillary, recToH.destination);
           
           System.out.println("...End");
-          recToH.printTowers();
+          recRunner.writeResult("...End", output);
+          recToH.printTowers(output);
           
           // metrics
           endTime = System.nanoTime();
@@ -65,8 +93,37 @@ public class TowerOfHanoiRecursiveRunner {
       }
       
       System.out.println("\nSummary:");
+      recRunner.writeResult("\nSummary:", output);
+      
       System.out.println(recRunner.getMetrics());
+      recRunner.writeResult(recRunner.getMetrics(), output);
+      
+      // close filespec and return to operating system
+      // Ref: Project0.java
+      try {
+          output.close();
+      } catch (Exception x) {
+          System.err.println(x.toString());
+      }
+      
   }
+    
+    /**
+     *  Write a string to the output stream.
+     *  @param text   The text to write.
+     *  @param output The output stream to write the text to.
+     *  @ref Project0.java
+     */
+    private void writeResult(String text, BufferedWriter output) {
+        try {
+            output.write(text, 0, text.length());  
+            output.newLine();
+        } catch (IOException iox) {
+            System.err.println(iox.toString());
+            System.exit(3);
+        }
+        return;
+    }
     
     // metrics methods
     

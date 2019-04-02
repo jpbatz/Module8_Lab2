@@ -4,6 +4,8 @@
  */
 package Module8Lab2;
 
+import java.io.BufferedWriter;
+
 // TODOs:
 //        output to file, only
 //        no output to screen
@@ -53,11 +55,18 @@ public class RecursiveTowerOfHanoi {
         }
     }
 
-    public void printTowers() {
-        System.out.println();
-        source.print();
-        auxillary.print();
-        destination.print();
-        System.out.println();
+    public void printTowers(BufferedWriter output) {
+    	try {
+	        System.out.println();
+	        output.write("\n");
+	        source.print(output);
+	        auxillary.print(output);
+	        destination.print(output);
+	        System.out.println();
+	        output.write("\n");
+    	} catch (Exception ioe){
+            System.err.println(ioe.toString());
+            return;
+    	}
     }
 }
