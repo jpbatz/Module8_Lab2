@@ -1,43 +1,42 @@
+//Joanne Hayashi
+//EN.605.202.84.SP19: Lab 2 - Towers of Hanoi
+
 package Module8Lab2;
 
-public class RunMetric {
- 
- /*
- *  Ref: The Johns Hopkins University Whiting School of Engineering - Project0
- *  Provides a matched set to determine Big-O runtime metrics.
- *  @version    1.0     2011-05-08
- *  @author     W.T. Door
+/**
+ *  method: RunMetric() - a runtime metric object constructor
+ *  @param size - problem size
+ *  @param runTime - running time of problem
+ *  @ref - Project0 (JHU)
  */
+public class RunMetric {
 
-    private long size;
-    private long runtime;
-    
-    /**
-     *  A single constructor is used to create each metric.  The metric
-     *  cannot be changed after creation.
-     *  @param n The size of the problem.
-     *  @param t The time it took to solve the problem.
-     */
-    public RunMetric (long n, long t) {
-    
-        size = n;
-        runtime = t;
-    }
+   public RunMetric (long size, long runTime) {
+      this.size = size;
+      this.runTime = runTime;
+   }
 
-    /**
-     *  Fetches the time it took to solve the problem.
-     *  @return The time measured in nanoseconds.
-     */
-    public long getRuntime() {
-        return runtime;
-    }
-    
-    /**
-     *  Fetches the size of the problem.
-     *  @return A size that is determined by the way the problem is stated.
-     */
-    public long getSize() {
-        return size;
-    }
+   /**
+    *  method: getRuntime() - returns running time
+    *  @param none
+    *  @return runTime - running time in nSec
+    */
+   public long getRuntime() {
+      return this.runTime;
+   }
+   
+   /**
+    *  method: getSize() - returns problem size
+    *  @param none
+    *  @return size - problem size
+    */
+   public long getSize() {
+      return this.size;
+   }
 
+   // ***** PRIVATE VARIABLE(S) *****
+   
+   private long size;
+   private long runTime;
+   
 }
