@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * class: RecursiveTowerOfHanoi - recursive solution to the Towers of Hanoi
- * Ref: Ref: https://en.wikipedia.org/wiki/Tower_of_Hanoi
+ * Ref: https://en.wikipedia.org/wiki/Tower_of_Hanoi
  */
 public class RecursiveTowerOfHanoi {
 
